@@ -45,8 +45,9 @@
           </ul>
         -->
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="https://github.com/sunnyone/Waifu2xAvisynth/releases/tag/0.0.1">Download</a></li>
-            <li><a href="../navbar-fixed-top/">Usage</a></li>
+            <li><a href="https://github.com/sunnyone/Waifu2xAvisynth/releases/download/0.0.1/Waifu2xAvisynth-0.0.1.zip">Download</a></li>
+            <li><a href="#usage">Usage</a></li>
+            <li><a href="#reference">Reference</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -56,13 +57,13 @@
     <h1>waifu2x Avisynth Plugin</h1>
     <div class="row">
       <div class="col-md-8">
-        <p>
-          waifu2xAvisynth は、waifu2xの変換処理をAvisynthのフィルタとして利用するプラグインです。
-          waifu2xのC++実装であるwaifu2x-converter-cppを利用しています。
+        <p style="font-size: larger">
+          waifu2xAvisynth は、<a href="http://waifu2x.udp.jp/">waifu2x</a>の変換処理をAvisynthのフィルタとして利用するプラグインです。
+          waifu2xのC++実装である<a href="https://github.com/WL-Amigo/waifu2x-converter-cpp">waifu2x-converter-cpp</a>を利用しています。
         </p>
 
         <p>
-          <a class="btn btn-primary" href="https://github.com/sunnyone/Waifu2xAvisynth/releases/tag/0.0.1"role="button">
+          <a class="btn btn-primary btn-lg" href="https://github.com/sunnyone/Waifu2xAvisynth/releases/download/0.0.1/Waifu2xAvisynth-0.0.1.zip"role="button">
             ダウンロード</a>
         </p>
       </div>
@@ -70,22 +71,72 @@
       <div class="col-md-4"><p>
       <img src="img/vdub-miku-scaling.png" class="img-responsive" />
       <figcaption>
-        ▲ミク画像が含まれる動画ファイルを2倍に変換するavsをVirtualDubで読んでいる様子
+        ▲waifu2x呼び出しを含むavsをVirtualDubで読んでいる様子
         (<a href="http://piapro.net/en_for_creators.html">Hatsune Miku by Cryption Future Media, INC. CC BY-NC</a>)
       </p>
       </div>
     </div>
 
-    <h2>利用環境</h2>
+    <h2>必要環境</h2>
     <ul>
-      <li>Avisynth 2.6</li>
+      <li>Avisynth 2.6/x86</li>
+      <li>潤沢なCPUリソース</li>
     </ul>
+    <p>
+      Waifu2xフィルタは非常に重く、作者のCore i5 (Haswell) 環境では、出力解像度600x928で0.02fpsほどでした。
+    </p>
 
-    <h2>使い方</h2>
-    Under construction.
+    <h2 id="usage">使い方</h2>
+    <p>
+      Waifu2xAvisynth.zipをどこかに展開後、Waifu2xプラグインを呼び出すようAvisynthスクリプトを記述し、avs2avi, avs2pipemodなどの
+      出力ソフトウェアで出力します。
+    </p>
 
-    <h2>Waifu2x関数</h2>
-    Under construnction.
+    <p>
+      好きなフォルダで構いませんが、デフォルトではdllのあるフォルダからmodelsフォルダを探し出すので、
+      dllとmodelsフォルダは一緒に配置することをおすすめします。
+    <p>
+
+    <p>
+      img.jpgを2倍に変換するスクリプト例(1フレームのみ)
+    </p>
+
+    <pre>LoadPlugin("c:\opt\waifu2xAvisynth\waifu2xAvisynth.dll")
+# AviSource("c:\temp\source.avi") などなど様々な読み込み処理
+ImageSource("c:\temp\img.jpg", end=0)
+Waifu2x(nr=1, scale=2)</pre>
+
+    <p>変換コマンド例<p>
+    <pre>avs2avi sample.avs sample.avi</pre>
+
+    <p>
+    詳しいAvisynthの使い方については、<a href="http://www.avisynth.info/">Avisynth.info</a>などを参照してください。
+    </p>
+
+    <p>
+    なお、waifu2x-converter-cppと異なり、縮小処理は実装していません。
+    2の倍数にならない場合は、Waifu2x()呼び出し後に、LanczosResize()などでリサイズしてください。
+    </p>
+
+    <p>
+    また、プレビューに耐えないほど遅いので、VirtualDubなどのGUIプレビューが可能なアプリケーションで
+    .avsファイルを開く際は十分注意してください。
+    </p>
+
+    <h2 id="reference">Waifu2x関数</h2>
+    <table class="table">
+      <tr><th>引数名</th><th>デフォルト値</th><th>範囲</th><th>説明</th></tr>
+      <tr><td>nr</td><td>1</td><td>0, 1, 2</td><td>ノイズリダクションレベル。0で無効。</td></tr>
+      <tr><td>scale</td><td>2</td><td>2, 4, 8...</td><td>倍率。2の倍数。1で拡大無効。</td></tr>
+      <tr><td>models</td><td>(dllと同じパス)</td><td>パス</td><td>modelsフォルダのパス</td></tr>
+      <tr><td>jobs</td><td>(コア数)</td><td>整数。0で自動(コア数)</td><td>ジョブ数</td></tr>
+    </table>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">waifu2xAvisynth by sunnyone</p>
+      </div>
+    </footer>
   </div>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
