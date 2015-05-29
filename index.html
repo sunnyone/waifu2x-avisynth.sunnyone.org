@@ -59,7 +59,7 @@
       <div class="col-md-8">
         <p style="font-size: larger">
           waifu2xAvisynth は、<a href="http://waifu2x.udp.jp/">waifu2x</a>の変換処理をAvisynthのフィルタとして利用するプラグインです。
-          waifu2xのC++実装である<a href="https://github.com/WL-Amigo/waifu2x-converter-cpp">waifu2x-converter-cpp</a>を利用しています。
+          waifu2xのC++実装である<a href="https://github.com/WL-Amigo/waifu2x-converter-cpp">waifu2x-converter-cpp</a>を内部的に利用しています。
         </p>
 
         <p>
@@ -71,7 +71,7 @@
       <div class="col-md-4"><p>
       <img src="img/vdub-miku-scaling.png" class="img-responsive" />
       <figcaption>
-        ▲waifu2x呼び出しを含むavsをVirtualDubで読んでいる様子
+        ▲waifu2x呼び出しを含むavsを<a href="http://www.virtualdub.org/">VirtualDub</a>で読んでいる様子
         (<a href="http://piapro.net/en_for_creators.html">Hatsune Miku by Cryption Future Media, INC. CC BY-NC</a>)
       </p>
       </div>
@@ -84,11 +84,14 @@
     </ul>
     <p>
       Waifu2xフィルタは非常に重く、作者のCore i5 (Haswell) 環境では、出力解像度600x928で0.02fpsほどでした。
+      Wineでも動くと思いますが、確認していません。
     </p>
 
     <h2 id="usage">使い方</h2>
     <p>
-      Waifu2xAvisynth.zipをどこかに展開後、Waifu2xプラグインを呼び出すようAvisynthスクリプトを記述し、avs2avi, avs2pipemodなどの
+      Waifu2xAvisynth.zipをどこかに展開後、Waifu2xプラグインを呼び出すようAvisynthスクリプトを記述し、
+      <a href="http://www.avisynth.info/?AVS2AVI">avs2avi</a>,
+      <a href="http://avisynth.nl/index.php/Avs2pipemod">avs2pipemod</a>などの
       出力ソフトウェアで出力します。
     </p>
 
