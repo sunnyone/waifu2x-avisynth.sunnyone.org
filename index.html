@@ -126,11 +126,17 @@ Waifu2x(nr=1, scale=2)</pre>
     .avsファイルを開く際は十分注意してください。
     </p>
 
+    <p>
+        また、途中経過をOutputDebugStringで出力しています。
+        <a href="https://technet.microsoft.com/ja-jp/sysinternals/bb896647.aspx">DebugView</a>
+        等で確認していただくと、状況がわかって便利です。
+    </p>
+
     <h2 id="reference">Waifu2x関数</h2>
     <table class="table">
       <tr><th>引数名</th><th>デフォルト値</th><th>範囲</th><th>説明</th></tr>
       <tr><td>nr</td><td>1</td><td>0, 1, 2</td><td>ノイズリダクションレベル。0で無効。</td></tr>
-      <tr><td>scale</td><td>2</td><td>2, 4, 8...</td><td>倍率。2の倍数。1で拡大無効。</td></tr>
+      <tr><td>scale</td><td>2</td><td>2, 4, 8...</td><td>倍率。2の累乗。1で拡大無効。</td></tr>
       <tr><td>models</td><td>(dllと同じパス)</td><td>パス</td><td>modelsフォルダのパス</td></tr>
       <tr><td>jobs</td><td>(コア数)</td><td>整数。0で自動(コア数)</td><td>ジョブ数</td></tr>
     </table>
